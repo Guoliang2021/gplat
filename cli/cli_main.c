@@ -1,5 +1,5 @@
-#include "inc/cli_add.h"
-#include "inc/cli_minus.h"
+#include "cli_add.h"
+#include "cli_minus.h"
 #include <stdio.h>
 
 int main(int argc, char *argv[])

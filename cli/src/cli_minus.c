@@ -1,4 +1,4 @@
-#include "../inc/cli_minus.h"
+#include "cli_minus.h"
 
 int cliMinus(int a, int b)
 {

@@ -1,4 +1,4 @@
-#include "../inc/cli_add.h"
+#include "cli_add.h"
 
 int cliAdd(int a, int b)
 {

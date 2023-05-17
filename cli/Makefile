@@ -1,6 +1,8 @@
 OBJDIR := $(shell pwd)/obj
+INCDIR := $(shell pwd)/inc
 
 SRCS := $(wildcard *.c) $(wildcard ./src/*.c)
+INC := $(foreach path,${INCDIR},-I${path})
 
 VPATH := $(sort $(dir $(SRCS)))
 OBJS := $(patsubst %.c,$(OBJDIR)/%.o,$(notdir $(SRCS)))
@@ -12,13 +14,15 @@ cli:$(OBJDIR)/cli_main.o $(OBJDIR)/cli_add.o $(OBJDIR)/cli_minus.o
 
 $(OBJDIR)/%.o:%.c
 	@mkdir -p $(OBJDIR)
-	gcc -c -MMD $< -o $@
+	gcc -c $(INC) -MMD $< -o $@
 
 -include $(DEPS)
 
 info:
 	@echo "OBJS = $(OBJS)"
 	@echo "SRCS = $(SRCS)"
+	@echo "INCDIR = $(INCDIR)"
+	@echo "INC = $(INC)"
 
 clean:
 	@rm -rf $(OBJDIR)
