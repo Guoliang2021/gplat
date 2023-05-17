@@ -1,21 +1,22 @@
-CLIOBJ_DIR := $(shell pwd)/obj
+OBJDIR := $(shell pwd)/obj
 
-cli:$(CLIOBJ_DIR)/cli_main.o $(CLIOBJ_DIR)/cli_add.o $(CLIOBJ_DIR)/cli_minus.o
+SRCS := $(wildcard *.c) $(wildcard ./src/*.c)
+
+VPATH := $(sort $(dir $(SRCS)))
+OBJS := $(patsubst %.c,$(OBJDIR)/%.o,$(notdir $(SRCS)))
+
+cli:$(OBJDIR)/cli_main.o $(OBJDIR)/cli_add.o $(OBJDIR)/cli_minus.o
 	@gcc $^ -o ../bin/$@
 	@echo "build $@ complete"
 
-$(CLIOBJ_DIR)/cli_main.o:./cli_main.c
-	@mkdir -p $(CLIOBJ_DIR)
+$(OBJDIR)/%.o:%.c
+	@mkdir -p $(OBJDIR)
 	gcc -c $< -o $@
 
-$(CLIOBJ_DIR)/cli_add.o:./src/cli_add.c ./inc/cli_add.h
-	@mkdir -p $(CLIOBJ_DIR)
-	gcc -c $< -o $@
-
-$(CLIOBJ_DIR)/cli_minus.o:./src/cli_minus.c ./inc/cli_minus.h
-	@mkdir -p $(CLIOBJ_DIR)
-	gcc -c $< -o $@
+info:
+	@echo "OBJS = $(OBJS)"
+	@echo "SRCS = $(SRCS)"
 
 clean:
-	@rm -rf $(CLIOBJ_DIR)
+	@rm -rf $(OBJDIR)
 	@echo "clean complete"
