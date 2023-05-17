@@ -2,5 +2,5 @@
 
 int cliAdd(int a, int b)
 {
-    return COE * (a + b);    
+    return COE * (a + b);
 }
