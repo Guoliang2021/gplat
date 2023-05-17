@@ -4,6 +4,7 @@ SRCS := $(wildcard *.c) $(wildcard ./src/*.c)
 
 VPATH := $(sort $(dir $(SRCS)))
 OBJS := $(patsubst %.c,$(OBJDIR)/%.o,$(notdir $(SRCS)))
+DEPS := $(patsubst %.o, %.d, $(OBJS))
 
 cli:$(OBJDIR)/cli_main.o $(OBJDIR)/cli_add.o $(OBJDIR)/cli_minus.o
 	@gcc $^ -o ../bin/$@
@@ -11,7 +12,9 @@ cli:$(OBJDIR)/cli_main.o $(OBJDIR)/cli_add.o $(OBJDIR)/cli_minus.o
 
 $(OBJDIR)/%.o:%.c
 	@mkdir -p $(OBJDIR)
-	gcc -c $< -o $@
+	gcc -c -MMD $< -o $@
+
+-include $(DEPS)
 
 info:
 	@echo "OBJS = $(OBJS)"
