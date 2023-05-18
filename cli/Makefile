@@ -1,3 +1,4 @@
+CFLAGS ?= $(CFLAGS_COMMON)
 OBJ_DIR := $(CLI_DIR)/obj
 INC_DIR := $(CLI_DIR)/inc
 INC_DIR += $(COMMON_INC_DIR)
@@ -10,12 +11,12 @@ OBJS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(notdir $(SRCS)))
 DEPS := $(patsubst %.o, %.d, $(OBJS))
 
 cli:$(OBJS)
-	@gcc $^ -o ../bin/$@
+	@gcc $(CFLAGS_COMMON) $^ -o ../bin/$@
 	@echo "build $@ complete"
 
 $(OBJ_DIR)/%.o:%.c
 	@mkdir -p $(OBJ_DIR)
-	gcc -c $(INC) -MMD $< -o $@
+	gcc -c $(CFLAGS_COMMON) $(INC) -MMD $< -o $@
 	@echo "CC $@"
 
 -include $(DEPS)

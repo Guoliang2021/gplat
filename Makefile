@@ -4,6 +4,7 @@ export CLI_DIR := $(ROOT_DIR)/cli
 export BIN_DIR := $(ROOT_DIR)/bin
 
 export COMMON_INC_DIR := $(COMMON_DIR)/inc
+export CFLAGS_COMMON := -g -fsanitize=address
 
 all:
 	@make -s -C $(CLI_DIR)

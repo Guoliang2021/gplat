@@ -1,6 +1,6 @@
 #include "cli_add.h"
 
-int cliAdd(int a, int b)
+uint32_t cliAdd(uint32_t a, uint32_t b)
 {
-    return COE * (a + b);
+    return a + b;
 }

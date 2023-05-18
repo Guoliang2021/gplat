@@ -1,7 +1,7 @@
 #ifndef __CLI_ADD_H__
 #define __CLI_ADD_H__
+#include "GDefs.h"
 
-#define COE 1
-int cliAdd(int a, int b);
+uint32_t cliAdd(uint32_t a, uint32_t b);
 
 #endif
