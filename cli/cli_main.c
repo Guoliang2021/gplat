@@ -1,3 +1,4 @@
+#include "GDefs.h"
 #include "cli_add.h"
 #include "cli_minus.h"
 #include <stdio.h>

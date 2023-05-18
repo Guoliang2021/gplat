@@ -1,19 +1,20 @@
-OBJDIR := $(shell pwd)/obj
-INCDIR := $(shell pwd)/inc
+OBJ_DIR := $(CLI_DIR)/obj
+INC_DIR := $(CLI_DIR)/inc
+INC_DIR += $(COMMON_INC_DIR)
 
 SRCS := $(wildcard *.c) $(wildcard ./src/*.c)
-INC := $(foreach path,${INCDIR},-I${path})
+INC := $(foreach path,${INC_DIR},-I${path})
 
 VPATH := $(sort $(dir $(SRCS)))
-OBJS := $(patsubst %.c,$(OBJDIR)/%.o,$(notdir $(SRCS)))
+OBJS := $(patsubst %.c,$(OBJ_DIR)/%.o,$(notdir $(SRCS)))
 DEPS := $(patsubst %.o, %.d, $(OBJS))
 
-cli:$(OBJDIR)/cli_main.o $(OBJDIR)/cli_add.o $(OBJDIR)/cli_minus.o
+cli:$(OBJS)
 	@gcc $^ -o ../bin/$@
 	@echo "build $@ complete"
 
-$(OBJDIR)/%.o:%.c
-	@mkdir -p $(OBJDIR)
+$(OBJ_DIR)/%.o:%.c
+	@mkdir -p $(OBJ_DIR)
 	gcc -c $(INC) -MMD $< -o $@
 	@echo "CC $@"
 
@@ -22,9 +23,9 @@ $(OBJDIR)/%.o:%.c
 info:
 	@echo "OBJS = $(OBJS)"
 	@echo "SRCS = $(SRCS)"
-	@echo "INCDIR = $(INCDIR)"
+	@echo "INC_DIR = $(INC_DIR)"
 	@echo "INC = $(INC)"
 
 clean:
-	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJ_DIR)
 	@echo "clean complete"
