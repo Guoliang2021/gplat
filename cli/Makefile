@@ -15,6 +15,7 @@ cli:$(OBJDIR)/cli_main.o $(OBJDIR)/cli_add.o $(OBJDIR)/cli_minus.o
 $(OBJDIR)/%.o:%.c
 	@mkdir -p $(OBJDIR)
 	gcc -c $(INC) -MMD $< -o $@
+	@echo "CC $@"
 
 -include $(DEPS)
 

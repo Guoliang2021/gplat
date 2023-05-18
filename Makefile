@@ -1,4 +1,4 @@
 all:
-	@make -C ./cli
+	@make -s -C ./cli
 clean:
-	@make clean -C ./cli
+	@make clean -s -C ./cli
